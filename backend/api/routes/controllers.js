@@ -85,7 +85,7 @@ const addSlotController = async (req, res, next) => {
 }
 
 
-/* Add a new slot for the doctor */
+/* Get slots for the doctor for a particular date */
 const getSlotsController = async (req, res, next) => {
   // Read inputs
   const {doctorId, date} = req.data;
