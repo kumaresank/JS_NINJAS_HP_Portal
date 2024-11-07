@@ -10,12 +10,32 @@ const passwordSchema = z.string()
   .regex(/[@$!%*?&#]/, "Password must contain at least one special character (@$!%*?&#)");
 
 
+/**
+ * Custom error class for handling HTTP errors with additional payload data.
+ * Extends the built-in Error class to include structured error information
+ * that can be used in an API response.
+ */
 class HttpError extends Error {
-  payload
+  /**
+   * @typedef {Object} HttpErrorPayload
+   * @property {number} status - HTTP status code (e.g., 400).
+   * @property {string} code - Business-specific error code.
+   * @property {string} message - User-friendly error message to display.
+   * @property {Object} [data] - Optional additional data related to the error.
+   */
 
+  /**
+   * @type {HttpErrorPayload}
+   */
+  payload;
+  
+  /**
+   * Creates an instance of HttpError.
+   * @param {HttpErrorPayload} payload - The error payload containing status, code, message, and optional data.
+   */
   constructor(payload) {
-    super(payload.message)
-    this.payload = payload
+    super(payload.message);
+    this.payload = payload;
   }
 }
   
