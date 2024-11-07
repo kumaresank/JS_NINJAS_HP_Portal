@@ -1,4 +1,5 @@
 const UserModel = require("../models/User");
+const SlotModel = require("../models/Slot");
 const jwt = require('jsonwebtoken');
 const { HttpError, userDataToSend } = require("./helpers");
 
@@ -49,7 +50,7 @@ const profileController = async (req, res, next) => {
     return res.status(200).json(user);
 }
 
-/* Login an existing user */
+/* Fetch the list of all doctors */
 const fetchDoctorsController = async (req, res, next) => {
   // Read inputs
   const user = req.user;
@@ -61,10 +62,47 @@ const fetchDoctorsController = async (req, res, next) => {
   return res.status(200).json({doctors});
 }
 
+/* Add a new slot for the doctor */
+const addSlotController = async (req, res, next) => {
+  // Read inputs
+  const {doctorId, date, slots} = req.data;
+
+  const doctor = await UserModel.findOne({ _id: doctorId });
+  if (doctor) {
+    throw new HttpError({
+      status: 400, code: "bad_request", message: "No such doctor found"
+    });
+  }
+
+  // All slots for the current date are overwritten
+  const slotDocument = await SlotModel.findOneAndUpdate(
+    { doctorId, date },
+    { doctorId, date, slots },
+    { upsert: true, new: true }
+  );
+  await slotDocument.save();
+  return res.status(200).json({slot: slotDocument});
+}
+
+
+/* Get slots for the doctor for a particular date */
+const getSlotsController = async (req, res, next) => {
+  // Read inputs
+  const {doctorId, date} = req.data;
+
+  const data = await SlotModel.find({ 
+    doctorId: doctorId,
+    date: date
+   });
+  return res.status(200).json(data);
+}
+
 
 module.exports = {
   signupController,
   loginController,
   profileController,
-  fetchDoctorsController
+  fetchDoctorsController,
+  addSlotController,
+  getSlotsController
 };
