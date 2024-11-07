@@ -1,13 +1,18 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-require('dotenv').config();
 
 const router = express.Router();
 
 router.post('/register', async(req,res) => {
     try {
         const { firstName, lastName, email, password } = req.body;
+        
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: 'User already exists' });
+        }
+
         const user = new User({ firstName, lastName, email, password });
         await user.save();
         return res.status(201).json({ message: 'User created' });
