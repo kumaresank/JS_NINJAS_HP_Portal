@@ -65,12 +65,66 @@
 {
     "fullName": "heyo"
 }
+
+```
+
+## Create appointement
+- Endpoint -> `/appointmets/create`
+- Request 
+```javascript
+{
+    "patientId": "1",
+    "doctorId": "1",
+    "date": "str",
+    "reason": "str",
+    "notes": "str"
+}
+```
+- Response 
+```javascript
+{
+    "id": "1",
+    "patientId": "str",
+    "doctorId": "str",
+    "date": "str",
+    "reason": "str",
+    "notes": ""
+}
 ```
 
 ## Patients Appointments
-- Endpoint -> `/appointmets`
+- Endpoint -> `patients/:patientId/appointmets`
 - Request
 ```javascript
+
 ```
-- 
+- Response
+```javascript
+{
+    "id": "1",
+    "patientId": "str",
+    "doctorId": "str",
+    "date": "str",
+    "reason": "str",
+    "notes": ""
+}
+```
+
+## Doctors Appointments
+- Endpoint -> `doctors/:doctorId/appointmets`
+- Request
+```javascript
+
+```
+- Response
+```javascript
+{
+    "id": "1",
+    "patientId": "str",
+    "doctorId": "str",
+    "date": "str",
+    "reason": "str",
+    "notes": ""
+}
+```
 
