@@ -7,9 +7,10 @@
 ## Std error response
 ```javascript
 {
-    "errorCode": "<errorCode>",
-    "errorMessage": "User friendly error message",
-    "data"?: {}  // specific to the api
+    "status": 400, // http error code,
+    "code": "<business_error_code>"  // business specific error code
+    "message": "User friendly error message",  // error message to diplay to user
+    "data"?: {}  // any data 
 }
 ```
 
@@ -68,6 +69,18 @@
 
 ## Get doctors
 - Endpoints -> `/doctors/`
+- Method -> `GET`
+- Response
+```javascript
+{
+    "doctors": [
+        {"id": string, "name": string}
+    ]
+}
+```
+
+## Update slots
+- Endpoints -> `/slots/`
 - Method -> `GET`
 - Response
 ```javascript
