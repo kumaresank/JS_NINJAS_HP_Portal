@@ -70,6 +70,17 @@
 
 ```
 
+## Get doctors
+- Endpoints - `/doctors/`
+- Response
+```javascript
+{
+    "doctors": [
+        {"id": string, "name": string}
+    ]
+}
+```
+
 ## Get doctor slots
 - Endpoint -> `/slots/:doctorId`
 - Request 
