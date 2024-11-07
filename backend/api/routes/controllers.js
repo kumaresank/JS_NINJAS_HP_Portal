@@ -81,7 +81,7 @@ const addSlotController = async (req, res, next) => {
     { upsert: true, new: true }
   );
   await slotDocument.save();
-  return res.status(200).json({slot: slotDocument});
+  return res.status(200).json(slotDocument);
 }
 
 
