@@ -134,7 +134,7 @@
 
 ```
 
-## Add new slots for a doctor slots
+## Add new slots for a doctor on a given date
 - Endpoints -> `/slots/add`
 - Method -> `POST`
 - Request
