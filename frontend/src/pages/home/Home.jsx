@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from "react";
 import "./Home.css"
 import Card from '../../components/card/Card';
+import Login from "../login/Login.jsx";
 
 const cards = [
   {
@@ -26,6 +27,16 @@ const cards = [
 ]
 
 function Home() {
+  const [isLoginVisible, setIsLoginVisible] = useState(false);
+
+  const openPopup = () => {
+    setIsLoginVisible(true);
+  };
+
+  const closePopup = () => {
+    setIsLoginVisible(false);
+  };
+
   return <>
     <div>
       <header>Bayer Healthcare</header>
@@ -35,7 +46,7 @@ function Home() {
         <li>Resources</li>
         <li>About Us</li>
         <li>Contact</li>
-        <li>Login</li>
+        <li onClick={openPopup}>Login</li>
       </ul></nav>
       <div class="hero">
         <h1>Your Health, Our Priority</h1>
@@ -43,13 +54,16 @@ function Home() {
       </div>
     </div>
     <div className="container">
-      <div style={{width: "80%", display: "flex", flexDirection:"column", justifyContent:'center'}}>
-        <h2 style={{paddingLeft: 24, marginBottom: -8}}>Featured Health Topics</h2>
+      <div style={{ width: "80%", display: "flex", flexDirection: "column", justifyContent: 'center' }}>
+        <h2 style={{ paddingLeft: 24, marginBottom: -8 }}>Featured Health Topics</h2>
         <div className="" card-container>
           {cards.map(card => <Card {...card} />)}
         </div>
       </div>
     </div>
+    {
+      isLoginVisible && (<Login onClose={closePopup} />)
+    }
   </>
 }
 

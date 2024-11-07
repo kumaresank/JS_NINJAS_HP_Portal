@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Home() {
+function PatientDashboard() {
   return <div>PatientDashboard</div>;
 }
 
-export default Home;
+export default PatientDashboard;
