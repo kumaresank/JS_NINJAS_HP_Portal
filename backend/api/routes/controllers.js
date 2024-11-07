@@ -41,18 +41,26 @@ const loginController = async (req, res, next) => {
   return res.status(200).json({ token, ...userDataToSend(user) });
 }
 
+/* Profile for logged in user */
+const profileController = async (req, res, next) => {
+    // Read inputs
+    const user = req.user;
+
+    return res.status(200).json(user);
+}
 
 /* Login an existing user */
 const fetchDoctorsController = async (req, res, next) => {
   // Read inputs
   const user = req.user;
-  
-  return res.status(200).json({user: user});
+
+  return res.status(200).json(user);
 }
 
 
 module.exports = {
   signupController,
   loginController,
+  profileController,
   fetchDoctorsController
 };

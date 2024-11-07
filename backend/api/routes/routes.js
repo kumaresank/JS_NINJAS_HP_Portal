@@ -18,10 +18,16 @@ router.post('/auth/login',
   asyncHttpErrorWrapper(loginController)
 );
 
-// Login existing user
-router.get('/doctors', 
+// Profile for logged in user
+router.get('/user/profile',
+    auth,
+    asyncHttpErrorWrapper(profileController)
+  );
+
+// List of doctors
+router.get('/doctors',
   asyncHttpErrorWrapper(attachUser),
-  asyncHttpErrorWrapper(combineParamsAndBodyData(doctorsSchema)), 
+  asyncHttpErrorWrapper(combineParamsAndBodyData(doctorsSchema)),
   asyncHttpErrorWrapper(fetchDoctorsController)
 );
 
