@@ -2,6 +2,11 @@ const { errorToHttpErrorPayload, HttpError, userDataToSend } = require("./helper
 const jwt = require('jsonwebtoken');
 const UserModel = require("../models/User")
 
+/* 
+  This is needed to catch all runtime exceptions that occur at runtime. 
+  As addding errorHandler at global level in express middleware doesn't handle runtime exceptions for async functions.
+  So make sure to wrap all async middlewares/controllers in this to avoid redundant error handling
+*/
 const asyncHttpErrorWrapper = (controllerFn) => {
   return async (req, res, next) => {
     try {
@@ -82,9 +87,25 @@ const attachUser = async (req, res, next) => {
   next()
 }
 
+// Checks if the logged in user's role is one of the passed allowed roles
+const checkRole = (role) => {
+  return async (req, res, next) => {
+    const user = req.user
+    
+    if (role && !role.includes(user.role)) {
+      throw new HttpError({
+        status: 403, code: "bad_request", message: 'Forbidden'
+      })
+    }
+
+    next()
+  }
+}
+
 module.exports = {
   asyncHttpErrorWrapper,
   errorHandler,
   combineParamsAndBodyData,
-  attachUser
+  attachUser,
+  checkRole
 }

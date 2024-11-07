@@ -5,7 +5,8 @@ const signupSchema = z.object({
   email: z.string().email("Invalid email format"),
   firstName: z.string().min(2, "First name must be longer than 1 character"),
   lastName: z.string().min(2, "First name must be longer than 1 character"),
-  password: passwordSchema
+  password: passwordSchema,
+  role: z.enum(['patient', 'doctor']).default('patient'),
 });
 
 

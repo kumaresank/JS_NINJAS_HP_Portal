@@ -1,5 +1,5 @@
 const express = require('express');
-const { asyncHttpErrorWrapper, combineParamsAndBodyData, attachUser } = require("./middleware");
+const { asyncHttpErrorWrapper, combineParamsAndBodyData, attachUser, checkRole } = require("./middleware");
 const { signupSchema, loginSchema, profileSchema, doctorsSchema } = require('./schema');
 const { signupController, loginController, profileController, fetchDoctorsController } = require('./controllers');
 
