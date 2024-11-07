@@ -15,23 +15,6 @@
 ```
 
 
-## Login
-- Endpoint -> `/login`
-- Method -> `POST`
-- Request
-```json
-{
-    "email": "user@gmail.com",
-    "password": "mypass"
-}
-```
-- Response
-```javascript
-{
-    "token": "JWT Token"
-}
-```
-
 ## Signup
 - Endpoint -> `/signup`
 - Method -> `POST`
@@ -49,11 +32,39 @@
 {
 
     "token": "JWT Token",
+    "_id": "hshsd",
     "firstName": "Hello",
     "lastName": "User",
     "email": "user@gmail.com",
+    "role": "ehhe",
+    "isVerfied": false,
 }
 ```
+
+
+## Login
+- Endpoint -> `/login`
+- Method -> `POST`
+- Request
+```json
+{
+    "email": "user@gmail.com",
+    "password": "mypass"
+}
+```
+- Response
+```javascript
+{
+    "token": "JWT Token",
+    "_id": "hshsd",
+    "firstName": "Hello",
+    "lastName": "User",
+    "email": "user@gmail.com",
+    "role": "ehhe",
+    "isVerfied": false,
+}
+```
+
 
 ## Profile
 - Endpoint -> `/profile`
