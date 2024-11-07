@@ -82,7 +82,7 @@
 - Response 
 ```javascript
 {
-    "slots": []{"date": "str", "slots": str[]}
+    "slots": str[]
 }
 ```
 
@@ -112,10 +112,6 @@
 
 ## Patients Appointments
 - Endpoint -> `patients/:patientId/appointmets`
-- Request
-```javascript
-
-```
 - Response
 ```javascript
 {
@@ -130,10 +126,6 @@
 
 ## Doctors Appointments
 - Endpoint -> `doctors/:doctorId/appointmets`
-- Request
-```javascript
-
-```
 - Response
 ```javascript
 {
