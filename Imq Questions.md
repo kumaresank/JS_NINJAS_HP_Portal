@@ -6,4 +6,4 @@
 
 - `What happens if a patient is also a doctor?`
 
-- 
+- `dist folder inside the repo?`

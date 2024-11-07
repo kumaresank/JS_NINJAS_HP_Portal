@@ -1,4 +1,6 @@
-const { errorToHttpErrorPayload, HttpError } = require("./helpers")
+const { errorToHttpErrorPayload, HttpError, userDataToSend } = require("./helpers")
+const jwt = require('jsonwebtoken');
+const UserModel = require("../models/User")
 
 const asyncHttpErrorWrapper = (controllerFn) => {
   return async (req, res, next) => {
@@ -45,21 +47,44 @@ const combineParamsAndBodyData = (schema) => (req, res, next) => {
 };
 
 
-const auth = (req, res, next) => {
+const attachUser = async (req, res, next) => {
   const token = req.header('Authorization')?.split(' ')[1];
-  if (!token) return res.status(401).json({ message: 'Auth Error' });
+  if (!token) {
+    throw new HttpError({
+      status: 401, code: "bad_request", message: 'User not logged in'
+    })
+  }
+
+  let userId;
   try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = decoded;
-      next();
+      userId = decoded.userId;
   } catch (e) {
-      res.status(400).send({ message: 'Invalid Token' });
+    throw new HttpError({
+      status: 401, code: "bad_request", message: 'Please login to access'
+    })
   }
+  if (!userId) {
+    throw new HttpError({
+      status: 401, code: "bad_request", message: 'User not found'
+    })
+  }
+
+  // Fetch user from db
+  const user = await UserModel.findOne({_id: userId});
+  if (!user) {
+    throw new HttpError({
+      status: 401, code: "bad_request", message: 'User not found'
+    })
+  }
+
+  req.user = userDataToSend(user)
+  next()
 }
 
 module.exports = {
   asyncHttpErrorWrapper,
   errorHandler,
   combineParamsAndBodyData,
-  auth
+  attachUser
 }

@@ -67,7 +67,7 @@
 
 
 ## Profile
-- Endpoint -> `/profile`
+- Endpoint -> `/:userId/profile`
 - Method -> `GET`
 - Request 
 ```

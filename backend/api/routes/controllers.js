@@ -1,18 +1,7 @@
 const UserModel = require("../models/User");
-const { HttpError } = require("./helpers");
+const jwt = require('jsonwebtoken');
+const { HttpError, userDataToSend } = require("./helpers");
 
-
-// Utility
-const userDataToSend = (user) => {
-  return {
-    _id: user._id,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    role: user.role,
-    isVerified: user.isVerified,
-  }
-}
 
 /* Signup a new user */
 const signupController = async (req, res, next) => {
@@ -52,7 +41,18 @@ const loginController = async (req, res, next) => {
   return res.status(200).json({ token, ...userDataToSend(user) });
 }
 
+
+/* Login an existing user */
+const fetchDoctorsController = async (req, res, next) => {
+  // Read inputs
+  const user = req.user;
+  
+  return res.status(200).json({user: user});
+}
+
+
 module.exports = {
   signupController,
-  loginController
+  loginController,
+  fetchDoctorsController
 };
