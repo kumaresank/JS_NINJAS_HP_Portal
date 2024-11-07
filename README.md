@@ -20,14 +20,13 @@
 - Request
 ```json
 {
-    "email": "rahul@gmail.com",
+    "email": "user@gmail.com",
     "password": "mypass"
 }
 ```
 - Response
 ```javascript
 {
-
     "token": "JWT Token"
 }
 ```
@@ -38,10 +37,10 @@
 - Request
 ```javascript
 {
-    "fullName": "Rahul Badenkal",
-    "email": "rahulbadenkal@gmail.com",
+    "fisrtName": "Hello",
+    "lastName": "User",
+    "email": "user@gmail.com",
     "password": "mypass"
-    "role": "doctor" | "patient"
 }
 ```
 - Response
@@ -54,11 +53,8 @@
 
 ## Profile
 - Endpoint -> `/profile`
+- Method -> `GET`
 - Request 
-```javascript
-{
-    "userId": "1"
-}
 ```
 - Response 
 ```javascript
@@ -71,7 +67,8 @@
 ```
 
 ## Get doctors
-- Endpoints - `/doctors/`
+- Endpoints -> `/doctors/`
+- Method -> `GET`
 - Response
 ```javascript
 {
@@ -83,10 +80,11 @@
 
 ## Get doctor slots
 - Endpoint -> `/slots/:doctorId`
+- Method -> `GET`
 - Request 
 ```javascript
 {
-    "date": "str"
+    "date": "Date"
 }
 
 ```
@@ -99,12 +97,14 @@
 
 ## Create appointement
 - Endpoint -> `/appointmets/create`
+- Method -> `POST`
 - Request 
 ```javascript
 {
     "patientId": "1",
     "doctorId": "1",
-    "date": "str",
+    "date": "Date",
+    "slot": "str"
     "reason": "str",
     "notes": "str"
 }
@@ -116,36 +116,41 @@
     "patientId": "str",
     "doctorId": "str",
     "date": "str",
+    "slot": "str",
     "reason": "str",
-    "notes": ""
+    "notes": "str"
 }
 ```
 
 ## Patients Appointments
 - Endpoint -> `patients/:patientId/appointmets`
+- Method -> `GET`
+- - param -> `patientId`
 - Response
 ```javascript
-{
+[{
     "id": "1",
     "patientId": "str",
     "doctorId": "str",
     "date": "str",
     "reason": "str",
     "notes": ""
-}
+}]
 ```
 
 ## Doctors Appointments
 - Endpoint -> `doctors/:doctorId/appointmets`
+- Method -> `GET`
+- param -> `doctorId`
 - Response
 ```javascript
-{
+[{
     "id": "1",
     "patientId": "str",
     "doctorId": "str",
     "date": "str",
     "reason": "str",
     "notes": ""
-}
+}]
 ```
 
