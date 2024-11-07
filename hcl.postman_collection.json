@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "421d6f3d-6abf-4c73-a791-ecb07f890bb8",
+		"name": "hcl",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12194288",
+		"_collection_link": "https://solar-crater-837564-1.postman.co/workspace/dc9d80d6-2001-467f-85e5-d94c15d6115b/collection/12194288-421d6f3d-6abf-4c73-a791-ecb07f890bb8?action=share&source=collection_link&creator=12194288"
+	},
+	"item": [
+		{
+			"name": "test",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"email\": \"rahulbadenkal@gmail.com\",\n    \"password\": \"rahul@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"rahulbadenkal+admin@gmail.com\",\n    \"password\": \"heyoMate@123\",\n    \"adminEmail\": \"rahulbadenkal+admin@gmail.com\",\n    \"doctorEmail\": \"rahulbadenkal+doctor1@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/auth/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"rahulbadenkal+admin3@gmail.com\",\n    \"firstName\": \"Rahul-admin3\",\n    \"lastName\": \"Badenkal\",\n    \"password\": \"heyoMate@123\",\n    \"role\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/auth/register",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "doctors",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/doctors",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"doctors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addSlots",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"doctorId\": \"6451f6fc6cf8e4b4414b2e18\",\n  \"date\": \"2024-11-10\",\n  \"slots\": [\n    {\n      \"from\": \"2024-11-08T04:30:00Z\",\n      \"to\": \"2024-11-08T05:30:00Z\"\n    },\n    {\n      \"from\": \"2024-11-08T06:30:00Z\",\n      \"to\": \"2024-11-08T07:30:00Z\"\n    },\n    {\n      \"from\": \"2024-11-08T07:30:00Z\",\n      \"to\": \"2024-11-08T08:30:00Z\"\n    },\n    {\n      \"from\": \"2024-11-08T08:30:00Z\",\n      \"to\": \"2024-11-08T09:30:00Z\"\n    }\n  ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/slots/add",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"slots",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSlots",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"doctorId\": \"6451f6fc6cf8e4b4414b2e18\",\n  \"date\": \"2024-11-10\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/slots",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"slots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "profile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/user/profile",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
