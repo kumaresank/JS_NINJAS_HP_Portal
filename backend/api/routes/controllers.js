@@ -1,27 +1,15 @@
-const jwt = require('jsonwebtoken');
 const UserModel = require("../models/User");
-const { HttpError } = require("./../validation/helpers");
+const jwt = require('jsonwebtoken');
+const { HttpError, userDataToSend } = require("./helpers");
 
-
-// Utility
-const userDataToSend = (user) => {
-  return {
-    _id: user._id,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    role: user.role,
-    isVerified: user.isVerified,
-  }
-}
 
 /* Signup a new user */
 const signupController = async (req, res, next) => {
   // Read inputs
-  const { firstName, lastName, email, password } = req.data;
+  const userData = req.data;
 
   // Check if a user with this email already exists
-  const existingUser = await UserModel.findOne({ email });
+  const existingUser = await UserModel.findOne({ email: userData.email });
   if (existingUser) {
     throw new HttpError({
       status: 400, code: "bad_request", message: "A user with this email already exists."
@@ -29,7 +17,7 @@ const signupController = async (req, res, next) => {
   }
 
   // Create a new user if no existing user is found
-  const user = new UserModel({ firstName, lastName, email, password });
+  const user = new UserModel(userData);
   await user.save();
 
   return res.status(201).json(userDataToSend(user));
@@ -53,16 +41,30 @@ const loginController = async (req, res, next) => {
   return res.status(200).json({ token, ...userDataToSend(user) });
 }
 
-/* Profile for loggedin user */
+/* Profile for logged in user */
 const profileController = async (req, res, next) => {
-    const user = await User.findById(req.user.userId);
-    if(!user) return res.status(404).json({ message: "User not found" });
-  
-    return res.json(userDataToSend(user));
+    // Read inputs
+    const user = req.user;
+
+    return res.status(200).json(user);
 }
+
+/* Login an existing user */
+const fetchDoctorsController = async (req, res, next) => {
+  // Read inputs
+  const user = req.user;
+
+  // TODO: Do we need to add pagination? Assuming total expected doctors count is not high for now, so ignore 
+  let doctors = await UserModel.find({ role: 'doctor' });
+  doctors = doctors.map((x) => userDataToSend(x))
+
+  return res.status(200).json({doctors});
+}
+
 
 module.exports = {
   signupController,
   loginController,
-  profileController
+  profileController,
+  fetchDoctorsController
 };
