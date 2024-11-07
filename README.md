@@ -38,7 +38,7 @@
 - Request
 ```javascript
 {
-    "fisrtName": "Hello",
+    "firstName": "Hello",
     "lastName": "User",
     "email": "user@gmail.com",
     "password": "mypass"
@@ -48,7 +48,10 @@
 ```javascript
 {
 
-    "token": "JWT Token"
+    "token": "JWT Token",
+    "firstName": "Hello",
+    "lastName": "User",
+    "email": "user@gmail.com",
 }
 ```
 

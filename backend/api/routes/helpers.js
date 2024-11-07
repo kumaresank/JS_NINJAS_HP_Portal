@@ -19,9 +19,13 @@ class HttpError extends Error {
   /**
    * @typedef {Object} HttpErrorPayload
    * @property {number} status - HTTP status code (e.g., 400).
-   * @property {string} code - Business-specific error code.
+   * @property {HttpBusinessErrorCode} code - Business-specific error code.
    * @property {string} message - User-friendly error message to display.
    * @property {Object} [data] - Optional additional data related to the error.
+   */
+
+  /**
+   * @typedef {'bad_request'} HttpBusinessErrorCode
    */
 
   /**

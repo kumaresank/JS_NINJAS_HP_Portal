@@ -7,7 +7,7 @@ const asyncHttpErrorWrapper = (controllerFn) => {
     } catch (error) {
       console.error("HTTP Uncaught error!!!")
       const payload = errorToHttpErrorPayload(error)
-      console.error(payload.stackTrace || payload.message)
+      console.error(error)
       return res.status(payload.status).jsonp(payload)
     }
   };
@@ -16,7 +16,7 @@ const asyncHttpErrorWrapper = (controllerFn) => {
 const errorHandler = (error, req, res, next) => {
   console.error("HTTP Uncaught error!!!")
   const payload = errorToHttpErrorPayload(error)
-  console.error(payload.stackTrace || payload.message)
+  console.error(error)
   return res.status(payload.status).jsonp(payload)
 };
 

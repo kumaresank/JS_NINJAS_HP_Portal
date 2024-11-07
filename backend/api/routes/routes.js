@@ -15,7 +15,7 @@ router.post('/auth/register',
 // Login existing user
 router.post('/auth/login', 
   asyncHttpErrorWrapper(combineParamsAndBodyData(loginSchema)), 
-  asyncHttpErrorWrapper(asyncHttpErrorWrapper(loginController))
+  asyncHttpErrorWrapper(loginController)
 );
 
 module.exports = router;
