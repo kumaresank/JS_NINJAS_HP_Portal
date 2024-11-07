@@ -64,6 +64,8 @@
 ```javascript
 {
     "fullName": "heyo"
+    "email": "rahul@gmail.com",
+    "role": "doctor" | "patient",
 }
 
 ```
