@@ -1,7 +1,7 @@
 const express = require('express');
 const { asyncHttpErrorWrapper, combineParamsAndBodyData, attachUser } = require("./middleware");
-const { signupSchema, loginSchema, doctorsSchema } = require('./schema');
-const { signupController, loginController, fetchDoctorsController } = require('./controllers');
+const { signupSchema, loginSchema, profileSchema, doctorsSchema } = require('./schema');
+const { signupController, loginController, profileController, fetchDoctorsController } = require('./controllers');
 
 const router = express.Router();
 
@@ -20,7 +20,8 @@ router.post('/auth/login',
 
 // Profile for logged in user
 router.get('/user/profile',
-    auth,
+    asyncHttpErrorWrapper(attachUser),
+    asyncHttpErrorWrapper(combineParamsAndBodyData(profileSchema)), 
     asyncHttpErrorWrapper(profileController)
   );
 

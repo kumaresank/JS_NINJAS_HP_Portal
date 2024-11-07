@@ -14,11 +14,13 @@ const loginSchema = z.object({
   password: z.string(),
 });
 
+const profileSchema = z.any();  // No input needed
 
 const doctorsSchema = z.any();  // No input needed
 
 module.exports = {
   signupSchema,
   loginSchema,
+  profileSchema,
   doctorsSchema
 }
