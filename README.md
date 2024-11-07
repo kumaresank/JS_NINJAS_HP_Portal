@@ -70,6 +70,22 @@
 
 ```
 
+## Get doctor slots
+- Endpoint -> `/slots/:doctorId`
+- Request 
+```javascript
+{
+    "date": "str"
+}
+
+```
+- Response 
+```javascript
+{
+    "slots": []{"date": "str", "slots": str[]}
+}
+```
+
 ## Create appointement
 - Endpoint -> `/appointmets/create`
 - Request 
