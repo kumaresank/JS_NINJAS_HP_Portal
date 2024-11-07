@@ -1,7 +1,10 @@
-# Notes
-- What happens if the doctor is also a patient?
+# User Flow
 
-# Api endpoints
+![User Journey](./docs/images/user-flow.png)
+
+# API Docs
+
+Base URL : https://hp-portal.vercel.app
 
 
 ## Std error response
@@ -15,7 +18,7 @@
 
 
 ## Login
-- Endpoint -> `/login`
+- Endpoint -> `/api/auth/login`
 - Method -> `POST`
 - Request
 ```json
@@ -25,17 +28,21 @@
 }
 ```
 - Response
-```javascript
+```json
 {
-    "token": "JWT Token"
+    "token": "<JWT Token>",
+    "userId": "11313142424",
+    "firstName": "Kumaresan",
+    "lastName": "K",
+    "role": "doctor"
 }
 ```
 
 ## Signup
-- Endpoint -> `/signup`
+- Endpoint -> `/api/auth/register`
 - Method -> `POST`
 - Request
-```javascript
+```json
 {
     "fisrtName": "Hello",
     "lastName": "User",
@@ -44,36 +51,37 @@
 }
 ```
 - Response
-```javascript
+```json
 {
-
-    "token": "JWT Token"
+    "message": "User created"
 }
 ```
 
 ## Profile
-- Endpoint -> `/profile`
+- Endpoint -> `/api/user/profile`
 - Method -> `GET`
 - Request 
-```
+- Header ->  `Authorization: Bearer <token>`
 - Response 
-```javascript
+```json
 {
-    "fullName": "heyo"
-    "email": "rahul@gmail.com",
-    "role": "doctor" | "patient",
+    "userId": "11313142424",
+    "firstName": "Kumaresan",
+    "lastName": "K",
+    "role": "doctor"
 }
 
 ```
 
 ## Get doctors
-- Endpoints -> `/doctors/`
+- Endpoints -> `/api/doctors`
 - Method -> `GET`
+- Header ->  `Authorization: Bearer <token>`
 - Response
-```javascript
+```json
 {
     "doctors": [
-        {"id": string, "name": string}
+        {"id": "123", "name": "Kumaresan"}
     ]
 }
 ```
@@ -81,76 +89,80 @@
 ## Get doctor slots
 - Endpoint -> `/slots/:doctorId`
 - Method -> `GET`
+- Header ->  `Authorization: Bearer <token>`
 - Request 
-```javascript
+```json
 {
     "date": "Date"
 }
-
 ```
 - Response 
-```javascript
+```json
 {
-    "slots": str[]
+    "slots": ["9 AM", "10 AM"]
 }
 ```
 
 ## Create appointement
 - Endpoint -> `/appointmets/create`
 - Method -> `POST`
+- Header ->  `Authorization: Bearer <token>`
 - Request 
-```javascript
+```json
 {
     "patientId": "1",
     "doctorId": "1",
-    "date": "Date",
-    "slot": "str"
-    "reason": "str",
-    "notes": "str"
+    "date": "07/11/2024",
+    "slot": "9 AM",
+    "reason": "headache",
+    "notes": "do not think to much"
 }
 ```
 - Response 
-```javascript
+```json
 {
     "id": "1",
-    "patientId": "str",
-    "doctorId": "str",
-    "date": "str",
-    "slot": "str",
-    "reason": "str",
-    "notes": "str"
+    "patientId": "2",
+    "doctorId": "1",
+    "date": "07/11/2024",
+    "slot": "9 AM",
+    "reason": "headache",
+    "notes": "do not think too much"
 }
 ```
 
 ## Patients Appointments
 - Endpoint -> `patients/:patientId/appointmets`
 - Method -> `GET`
-- - param -> `patientId`
+- Header ->  `Authorization: Bearer <token>`
+- Param: url -> `patientId`
 - Response
-```javascript
+```json
 [{
     "id": "1",
-    "patientId": "str",
-    "doctorId": "str",
-    "date": "str",
-    "reason": "str",
-    "notes": ""
+    "patientId": "2",
+    "doctorId": "1",
+    "date": "07/11/2024",
+    "slot": "9 AM",
+    "reason": "headache",
+    "notes": "do not think too much"
 }]
 ```
 
 ## Doctors Appointments
 - Endpoint -> `doctors/:doctorId/appointmets`
-- Method -> `GET`
-- param -> `doctorId`
+- Header ->  `Authorization: Bearer <token>`
+- Param: url -> `doctorId`
 - Response
-```javascript
+```json
 [{
     "id": "1",
-    "patientId": "str",
-    "doctorId": "str",
-    "date": "str",
-    "reason": "str",
-    "notes": ""
+    "patientId": "2",
+    "doctorId": "1",
+    "date": "07/11/2024",
+    "slot": "9 AM",
+    "reason": "headache",
+    "notes": "do not think too much"
 }]
 ```
 
