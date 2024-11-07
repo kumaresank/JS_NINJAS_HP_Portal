@@ -302,12 +302,12 @@
 
 # Frontend UI
 
-Due to code merging there is issue so that UI is not showing correctly as it is built. So putting below the UI screen as below for better clarity
+Due to code merging there is issue so that UI is not showing correctly as it is built. So putting below the UI screen as below for better clarity. This can be viewed better in the branch fe-code and by modify <ProviderDashboard/> with <Home/> in App.jsx
 
 ### Home Page
 ![image](https://github.com/user-attachments/assets/6f5bf163-1da4-4d7c-99d8-69040d20286e)
 
-### Provider Portal
+### Provider Dashboard
 ![image](https://github.com/user-attachments/assets/502ae3b2-5cfd-4d40-b790-dd72024bd319)
 
 
